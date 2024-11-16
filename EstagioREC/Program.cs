@@ -23,7 +23,7 @@ var valueRange = new ValueRange
 var range = "estagio!A:G";
 var appendRequest = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range);
 appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-// var appendReponse = appendRequest.Execute();
+//var appendReponse = appendRequest.Execute();
 
 // Read
 
@@ -56,8 +56,8 @@ List<IList<object>> listaDadosFake() {
         var aluno = faker.PickRandom(faker.Name.FullName(Bogus.DataSets.Name.Gender.Female), faker.Name.FullName(Bogus.DataSets.Name.Gender.Male));
         var matricula = faker.Random.Number(100000, 999999);
         var orientador = faker.PickRandom(faker.Name.FullName(Bogus.DataSets.Name.Gender.Female), faker.Name.FullName(Bogus.DataSets.Name.Gender.Male));
-        var inicioEstagio = faker.Date.Past();
-        var fimEstagio = faker.Date.Future();
+        var inicioEstagio = faker.Date.Past().ToString("dd'/'MM'/'yyyy");
+        var fimEstagio = faker.Date.Future(2).ToString("dd'/'MM'/'yyyy");
         var empresa = faker.Company.CompanyName();
         var situacao = faker.PickRandom("Andamento", "Renovado", "Pendente");
         dados.Add(new List<object> { aluno, matricula, orientador, inicioEstagio, fimEstagio, empresa, situacao });
