@@ -14,18 +14,31 @@ var service = new SheetsService(new Google.Apis.Services.BaseClientService.Initi
     ApplicationName = "EstagioREC"
 });
 
-// Create
-var valueRange = new ValueRange
+// Adicionar orientadores
+var orientadores = geraDadosOrientador();
+var valueRangeOrientador = new ValueRange
 {
-    Values = listaDadosFake()
+    Values = orientadores
 };
 
-var range = "estagio!A:G";
-var appendRequest = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, range);
-appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-var appendReponse = appendRequest.Execute();
+var rangeOrientador = "orientador!A:C";
+var appendRequestOrientador = service.Spreadsheets.Values.Append(valueRangeOrientador, spreadsheetId, rangeOrientador);
+appendRequestOrientador.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+var appendResponseOrientador = appendRequestOrientador.Execute();
 
-// Read
+// Adicionar alunos
+var alunos = geraDadosAluno(orientadores.Skip(1).Select(o => o[0].ToString()).ToList());
+var valueRangeAluno = new ValueRange
+{
+    Values = alunos
+};
+
+var rangeAluno = "estagio!A:G";
+var appendRequestAluno = service.Spreadsheets.Values.Append(valueRangeAluno, spreadsheetId, rangeAluno);
+appendRequestAluno.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+var appendResponseAluno = appendRequestAluno.Execute();
+
+// Exemplo leitura
 
 var request = service.Spreadsheets.Values.Get(
     spreadsheetId, "estagio"
@@ -46,8 +59,26 @@ else
 }
 
 // generate list of fake data using Bogus
+
+// fields are Nome (string), Telefone (string), Email (string)
+List<IList<object>> geraDadosOrientador() { 
+    var faker = new Faker("pt_BR");
+    var dados = new List<IList<object>>();
+
+    dados.Add(new List<object> { "Nome", "Telefone", "Email" });
+    for (int i=0; i < 20; i++)
+    {
+        var nome = faker.Name.FullName();
+        var telefone = faker.Phone.PhoneNumber("(27)9####-####");
+        var email = faker.Internet.Email(nome.Split(" ")[0], nome.Split(" ")[^1]);
+
+        dados.Add(new List<object> { nome, telefone, email });
+    }
+    return dados;
+}
+
 // fields are Aluno (string), Matricula (number), Orientador (string), Inicio Estagio (date), Fim Estagio (date), Empresa (string), Situacao (Andamento, Renovado or Pendente)
-List<IList<object>> listaDadosFake() {
+List<IList<object>> geraDadosAluno(List<string?> orientadorNomes) {
     var faker = new Faker("pt_BR");
     var dados = new List<IList<object>>();
 
@@ -59,11 +90,12 @@ List<IList<object>> listaDadosFake() {
         var cod = faker.Random.Number(1000, 9999);
         var matricula = $"{ano}{semestre}{curso}{cod}";
         var aluno = faker.Name.FullName();
-        var orientador = faker.Name.FullName();
+        var orientador = faker.PickRandom(orientadorNomes);
         var inicioEstagio = faker.Date.Past().ToString("dd'/'MM'/'yyyy");
         var fimEstagio = faker.Date.Future(2).ToString("dd'/'MM'/'yyyy");
         var empresa = faker.Company.CompanyName();
         var situacao = faker.PickRandom("Andamento", "Renovado", "Pendente");
+
         dados.Add(new List<object> { aluno, matricula, orientador, inicioEstagio, fimEstagio, empresa, situacao });
     }
     return dados;
