@@ -1,7 +1,8 @@
 using Google.Apis.Sheets.v4;
 using Google.Apis.Auth.OAuth2;
+using EstagioREC.Model;
 
-namespace EstagioREC
+namespace EstagioREC.Data
 {
     public class DbInitializer
     {

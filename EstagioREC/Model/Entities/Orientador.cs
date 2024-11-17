@@ -1,4 +1,4 @@
-namespace EstagioREC
+namespace EstagioREC.Model
 {
     public class Orientador {
         public int Id { get; set; }

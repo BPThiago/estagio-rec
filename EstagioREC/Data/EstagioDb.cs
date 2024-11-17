@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using EstagioREC.Model;
 
-namespace EstagioREC
+namespace EstagioREC.Data
 {
     public class EstagioDb : DbContext
     {

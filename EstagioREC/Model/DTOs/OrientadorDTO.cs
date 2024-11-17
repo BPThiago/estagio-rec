@@ -1,4 +1,4 @@
-namespace EstagioREC
+namespace EstagioREC.Model
 {
     public class OrientadorDTO
     {
