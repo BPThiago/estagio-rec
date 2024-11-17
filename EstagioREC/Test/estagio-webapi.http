@@ -1,0 +1,17 @@
+@estagio_webapi_HostAddress = http://localhost:54125
+
+POST {{estagio_webapi_HostAddress}}/orientadores
+Content-Type: application/json
+
+{
+    "nome":"Roberto Carlos",
+    "email":"essecarasoueu@email.com",
+    "telefone":"(27)98888-8888"
+}
+
+###
+
+GET {{estagio_webapi_HostAddress}}/orientadores/21
+Content-Type: application/json
+
+###
