@@ -15,3 +15,18 @@ GET {{estagio_webapi_HostAddress}}/orientadores/21
 Content-Type: application/json
 
 ###
+
+POST {{estagio_webapi_HostAddress}}/alunos
+Content-Type: application/json
+
+{
+  "nome":"Jorge",
+  "matricula":"20221bsi0344"
+}
+
+###
+
+GET {{estagio_webapi_HostAddress}}/alunos/2
+Content-Type: application/json
+
+###
