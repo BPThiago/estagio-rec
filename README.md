@@ -44,6 +44,53 @@ Controllers[Controllers<br>AlunoController<br>OrientadorController<br>EmpresaCon
 
 ## Diagrama de Classes por Camada
 
+### Model Layer
+```mermaid
+classDiagram
+    Aluno "1" -- "*" Estagio
+    Orientador "1" -- "*" Estagio
+    Empresa "1" -- "*" Estagio
+    AppDbContext --> Aluno
+    AppDbContext --> Orientador
+    AppDbContext --> Empresa
+    AppDbContext --> Estagio
+
+    class Aluno {
+        +int Id
+        +string Nome
+        +string Matricula
+        +List<Estagio> Estagios
+    }
+
+    class Orientador {
+        +int Id
+        +string Nome
+        +string Email
+        +string Telefone
+        +List<Estagio> Estagios
+    }
+
+    class Empresa {
+        +int Id
+        +string Nome
+        +List<Estagio> Estagios
+    }
+
+    class Estagio {
+        +int Id
+        +DateTime dtInicio
+        +DateTime dtFim
+        +SituacaoEnum Situacao
+    }
+
+    class AppDbContext {
+        +DbSet<Aluno> Alunos
+        +DbSet<Orientador> Orientadores
+        +DbSet<Empresa> Empresas
+        +DbSet<Estagio> Estagios
+    }
+```
+
 ### Repository Layer
 ```mermaid
 classDiagram
