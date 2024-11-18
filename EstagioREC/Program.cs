@@ -8,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<EstagioDb>(opt => opt.UseInMemoryDatabase("Estagio"));
 
 builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
+builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 
 var app = builder.Build();
 
