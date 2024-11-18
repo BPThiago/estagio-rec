@@ -35,13 +35,27 @@ POST {{estagio_webapi_HostAddress}}/alunos
 Content-Type: application/json
 
 {
-  "nome":"Jorge",
+  "nome":"Char",
   "matricula":"20221bsi0344"
 }
 
 ###
 
-GET {{estagio_webapi_HostAddress}}/alunos/2
+GET {{estagio_webapi_HostAddress}}/alunos/
 Content-Type: application/json
+
+###
+
+PUT {{estagio_webapi_HostAddress}}/alunos/1
+Content-type: application/json
+
+{
+  "nome": "Thiago",
+  "matricula": "20221bsi0344"
+}
+
+###
+
+DELETE {{estagio_webapi_HostAddress}}/alunos/1
 
 ###

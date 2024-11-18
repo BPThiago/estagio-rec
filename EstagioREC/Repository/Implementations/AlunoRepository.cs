@@ -34,6 +34,23 @@ namespace EstagioREC.Repository
                 throw new Exception("Erro ao adicionar aluno", e);    
             }
         }
+
+        public async Task AtualizarAsync(Aluno aluno)
+        {
+            _context.Entry(aluno).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+        
+        public async Task DeletarAsync(int id)
+        {
+            var aluno = await _context.Alunos.FindAsync(id);
+            if (aluno == null)
+                return;
+            _context.Alunos.Remove(aluno);
+            await _context.SaveChangesAsync();
+        }
+        
+        
     }
 }
 

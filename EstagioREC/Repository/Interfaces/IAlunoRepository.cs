@@ -7,6 +7,8 @@ namespace EstagioREC.Repository
         Task<Aluno> ObterPorIdAsync(int id);
         Task<IEnumerable<Aluno>> ObterTodosAsync();
         Task<Aluno> AdicionarAsync(Aluno aluno);
+        Task AtualizarAsync(Aluno aluno);
+        Task DeletarAsync(int id);
     }
 }
 
