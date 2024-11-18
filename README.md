@@ -44,6 +44,88 @@ Controllers[Controllers<br>AlunoController<br>OrientadorController<br>EmpresaCon
 
 ## Diagrama de Classes por Camada
 
+### Controller e DTO Layer
+```mermaid
+classDiagram
+    AlunoController --> IAlunoRepository
+    OrientadorController --> IOrientadorRepository
+    EmpresaController --> IEmpresaRepository
+    EstagioController --> IEstagioRepository
+    EstagioController --> IAlunoRepository
+    EstagioController --> IOrientadorRepository
+    EstagioController --> IEmpresaRepository
+    AlunoController --> AlunoDTO : uses
+    OrientadorController --> OrientadorDTO : uses
+    EmpresaController --> EmpresaDTO : uses
+    EstagioController --> EstagioDTO : uses
+    AlunoDTO --> Aluno : maps to
+    OrientadorDTO --> Orientador : maps to
+    EmpresaDTO --> Empresa : maps to
+    EstagioDTO --> Estagio : maps to
+
+    class AlunoController {
+        -IAlunoRepository _alunoRepository
+        +CriarAluno(AlunoDTO) Task<ActionResult<Aluno>>
+        +ObterAluno(int) Task<ActionResult<Aluno>>
+        +ListarAlunos() Task<ActionResult<IEnumerable<Aluno>>>
+        +AtualizarAluno(int, AlunoDTO) Task<IActionResult>
+        +DeletarAluno(int) Task<IActionResult>
+    }
+
+    class OrientadorController {
+        -IOrientadorRepository _orientadorRepository
+        +CriarOrientador(OrientadorDTO) Task<ActionResult<Orientador>>
+        +ObterOrientador(int) Task<ActionResult<Orientador>>
+        +ListarOrientadors() Task<ActionResult<IEnumerable<Orientador>>>
+        +AtualizarOrientador(int, OrientadorDTO) Task<IActionResult>
+        +DeletarOrientador(int) Task<IActionResult>
+    }
+
+    class EmpresaController {
+        -IEmpresaRepository _empresaRepository
+        +CriarEmpresa(EmpresaDTO) Task<ActionResult<Empresa>>
+        +ObterEmpresa(int) Task<ActionResult<Empresa>>
+        +ListarEmpresas() Task<ActionResult<IEnumerable<Empresa>>>
+        +AtualizarEmpresa(int, EmpresaDTO) Task<IActionResult>
+        +DeletarEmpresa(int) Task<IActionResult>
+    }
+
+    class EstagioController {
+        -IEstagioRepository _estagioRepository
+        -IAlunoRepository _alunoRepository
+        -IOrientadorRepository _orientadorRepository
+        -IEmpresaRepository _empresaRepository
+        +CriarEstagio(EstagioDTO) Task<ActionResult<Estagio>>
+        +ObterEstagio(int) Task<ActionResult<Estagio>>
+        +ListarEstagiosPorAluno(int) Task<ActionResult<IEnumerable<Estagio>>>
+        +ListarEstagiosPorOrientador(int) Task<ActionResult<IEnumerable<Estagio>>>
+        +ListarEstagiosPorAluno(int) Task<ActionResult<IEnumerable<Estagio>>>
+        +AtualizarEstagio(int, EstagioDTO) Task<IActionResult>
+        +DeletarEstagio(int) Task<IActionResult>
+    }
+
+    class AlunoDTO {
+        +string Nome
+        +string Matricula
+    }
+
+    class OrientadorDTO {
+        +string Nome
+        +string Email
+        +string Telefone
+    }
+
+    class EmpresaDTO {
+        +string Nome
+    }
+    
+    class EstagioDTO {
+        +DateTime dtInicio
+        +DateTime dtFim
+        +SituacaoEnum Situacao
+    }
+```
+
 ### Model Layer
 ```mermaid
 classDiagram
@@ -78,6 +160,9 @@ classDiagram
 
     class Estagio {
         +int Id
+        +int AlunoId
+        +int OrientadorId
+        +int EmpresaId
         +DateTime dtInicio
         +DateTime dtFim
         +SituacaoEnum Situacao
