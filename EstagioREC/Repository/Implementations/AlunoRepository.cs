@@ -6,9 +6,9 @@ namespace EstagioREC.Repository
 {
     public class AlunoRepository : IAlunoRepository
     {
-        private readonly EstagioDb _context;
+        private readonly AppDbContext _context;
 
-        public AlunoRepository(EstagioDb context) {
+        public AlunoRepository(AppDbContext context) {
             _context = context;
         }
 

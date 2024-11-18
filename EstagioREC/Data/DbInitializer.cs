@@ -11,7 +11,7 @@ namespace EstagioREC.Data
         public static void RetrieveFromSheets(IApplicationBuilder app) {
             using (var serviceScope = app.ApplicationServices.CreateScope()) 
             {
-                var context = serviceScope.ServiceProvider.GetService<EstagioDb>();
+                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
                 if (context == null || context.Orientadores.Any()) 
                     return;

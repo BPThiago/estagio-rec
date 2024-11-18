@@ -6,9 +6,9 @@ namespace EstagioREC.Repository
 {
     public class OrientadorRepository : IOrientadorRepository
     {
-        private readonly EstagioDb _context;
+        private readonly AppDbContext _context;
 
-        public OrientadorRepository(EstagioDb context) {
+        public OrientadorRepository(AppDbContext context) {
             _context = context;
         }
 
