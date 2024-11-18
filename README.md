@@ -40,3 +40,91 @@ Controllers[Controllers<br>AlunoController<br>OrientadorController<br>EmpresaCon
         class Presentation,Business,Data layer
         class Controllers,Models,Repository,Context,InMemoryDB module
     end
+```
+
+## Diagrama de Classes por Camada
+
+### Repository Layer
+```mermaid
+classDiagram
+    IAlunoRepository <|.. AlunoRepository
+    IOrientadorRepository <|.. OrientadorRepository
+    IEmpresaRepository <|.. EmpresaRepository
+    IEstagioRepository <|.. EstagioRepository
+    AlunoRepository --> AppDbContext
+    OrientadorRepository --> AppDbContext
+    EmpresaRepository --> AppDbContext
+    EstagioRepository --> AppDbContext
+
+    class IAlunoRepository {
+        <<interface>>
+        +ObterPorIdAsync(int) Task<Aluno>
+        +ObterTodosAsync(int) Task<IEnumerable<Aluno>>
+        +AdicionarAsync(Aluno) Task<Aluno>
+        +AtualizarAsync(Aluno) Task
+        +DeletarAsync(int) Task
+    }
+
+    class IOrientadorRepository {
+        <<interface>>
+        +ObterPorIdAsync(int) Task<Orientador>
+        +ObterTodosAsync() Task<IEnumerable<Orientador>>
+        +AdicionarAsync(Orientador) Task<Orientador>
+        +AtualizarAsync(Orientador) Task
+        +DeletarAsync(int) Task
+    }
+
+    class IEmpresaRepository {
+        <<interface>>
+        +ObterPorIdAsync(int) Task<Empresa>
+        +ObterTodosAsync(int) Task<IEnumerable<Empresa>>
+        +AdicionarAsync(Empresa) Task<Empresa>
+        +AtualizarAsync(Empresa) Task
+        +DeletarAsync(int) Task
+    }
+
+    class IEstagioRepository {
+        <<interface>>
+        +ObterPorIdAsync(int) Task<Estagio>
+        +ObterTodosAsync(int) Task<IEnumerable<Estagio>>
+        +AdicionarAsync(Estagio) Task<Estagio>
+        +AtualizarAsync(Estagio) Task
+        +DeletarAsync(int) Task
+    }
+
+    class AlunoRepository {
+        -AppDbContext _context
+        +ObterPorIdAsync(int) Task<Aluno>
+        +ObterTodosAsync(int) Task<IEnumerable<Aluno>>
+        +AdicionarAsync(Aluno) Task<Aluno>
+        +AtualizarAsync(Aluno) Task
+        +DeletarAsync(int) Task
+    }
+
+    class OrientadorRepository {
+        -AppDbContext _context
+        +ObterPorIdAsync(int) Task<Orientador>
+        +ObterTodosAsync() Task<IEnumerable<Orientador>>
+        +AdicionarAsync(Orientador) Task<Orientador>
+        +AtualizarAsync(Orientador) Task
+        +DeletarAsync(int) Task
+    }
+
+    class EmpresaRepository {
+        -AppDbContext _context
+        +ObterPorIdAsync(int) Task<Empresa>
+        +ObterTodosAsync(int) Task<IEnumerable<Empresa>>
+        +AdicionarAsync(Empresa) Task<Empresa>
+        +AtualizarAsync(Empresa) Task
+        +DeletarAsync(int) Task
+    }
+
+    class EstagioRepository {
+        -AppDbContext _context
+        +ObterPorIdAsync(int) Task<Estagio>
+        +ObterTodosAsync(int) Task<IEnumerable<Estagio>>
+        +AdicionarAsync(Estagio) Task<Estagio>
+        +AtualizarAsync(Estagio) Task
+        +DeletarAsync(int) Task
+    }
+```
