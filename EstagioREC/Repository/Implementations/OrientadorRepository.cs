@@ -34,5 +34,19 @@ namespace EstagioREC.Repository
                 throw new Exception("Erro ao adicionar orientador", e);    
             }
         }
+
+        public async Task AtualizarAsync(Orientador orientador) {
+            _context.Entry(orientador).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeletarAsync(int id)
+        {
+            var orientador = await _context.Orientadores.FindAsync(id);
+            if (orientador == null)
+                return;
+            _context.Orientadores.Remove(orientador);
+            await _context.SaveChangesAsync();
+        }
     }
 }

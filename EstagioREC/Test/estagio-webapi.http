@@ -16,6 +16,21 @@ Content-Type: application/json
 
 ###
 
+PUT {{estagio_webapi_HostAddress}}/orientadores/21
+Content-Type: application/json
+
+{
+    "nome":"Roberto Carlos",
+    "email":"tantasemocoes@email.com",
+    "telefone":"(27)98888-8888"
+}
+
+###
+
+DELETE {{estagio_webapi_HostAddress}}/orientadores/21
+
+###
+
 POST {{estagio_webapi_HostAddress}}/alunos
 Content-Type: application/json
 
