@@ -11,5 +11,6 @@ namespace EstagioREC.Data
         
         public DbSet<Orientador> Orientadores => Set<Orientador>();
         public DbSet<Aluno> Alunos => Set<Aluno>();
+        public DbSet<Empresa> Empresas => Set<Empresa>();
     }
 }

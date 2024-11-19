@@ -9,6 +9,7 @@ builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Esta
 
 builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
 
 var app = builder.Build();
 
