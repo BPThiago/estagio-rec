@@ -2,7 +2,14 @@
 
 public class Empresa
 {
-    public int id { get; set; }
-    public String nome { get; set; }
-    public List<Estagio> estagios { get; set; }
+    public int Id { get; set; }
+    public String Nome { get; set; }
+
+    public Empresa() { }
+
+    public Empresa(EmpresaDTO empresaDTO)
+    {
+        Id = empresaDTO.Id;
+        Nome = empresaDTO.Nome;
+    }
 }

@@ -59,3 +59,67 @@ Content-type: application/json
 DELETE {{estagio_webapi_HostAddress}}/alunos/1
 
 ###
+
+POST {{estagio_webapi_HostAddress}}/empresas/
+Content-Type: application/json
+
+{
+  "nome":"IFES"
+}
+
+###
+PUT {{estagio_webapi_HostAddress}}/empresas/1
+Content-Type: application/json
+
+{
+  "nome":"REC"
+}
+
+###
+
+GET {{estagio_webapi_HostAddress}}/empresas/
+
+###
+
+DELETE {{estagio_webapi_HostAddress}}/empresas/1
+
+###
+
+POST {{estagio_webapi_HostAddress}}/estagios/
+Content-Type: application/json
+
+{
+  "aluno": {
+    "nome": "Thiago",
+    "matricula": "20221bsi0344"
+   },
+  "orientador": {
+    "nome":"Roberto Carlos",
+    "email":"essecarasoueu@email.com",
+    "telefone":"(27)98888-8888" 
+   },
+  "empresa": {"nome":"REC"},
+  "dataInicio": "2021-09-01",
+  "dataFim": "2022-09-01",
+  "status": 1
+}
+
+###
+
+GET {{estagio_webapi_HostAddress}}/estagios/
+
+###
+
+PUT {{estagio_webapi_HostAddress}}/estagios/1
+Content-Type: application/json
+
+{
+  "aluno": {
+    "nome": "Francisco",
+    "matricula": "20221bsi0009"
+   },
+  "orientador": {
+    "nome":"Fernandinho",
+    "email":"Fer@gmail.com"},
+  "empresa": {"nome":"REC"}
+}

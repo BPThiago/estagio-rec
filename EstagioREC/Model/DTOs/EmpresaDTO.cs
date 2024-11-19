@@ -2,17 +2,12 @@
 
 public class EmpresaDTO
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     public string Nome { get; set; }
-    public List<Estagio> estagios { get; set; }
         
-    public EmpresaDTO(int Id, string nome, List<Estagio> estagios)
+    public EmpresaDTO(int Id, string nome)
     {
-        id = Id;
+        Id = Id;
         this.Nome = nome;
-        foreach (Estagio estagio in estagios)
-        {
-            this.estagios.Add(estagio);
-        }
     }
 }

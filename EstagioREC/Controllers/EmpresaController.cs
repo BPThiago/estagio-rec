@@ -34,27 +34,20 @@ namespace EstagioREC.Controller
         [HttpPost("Empresas/")]
         public async Task<ActionResult<Empresa>> CriarEmpresa(EmpresaDTO empresaDTO)
         {
-            var empresa = new Empresa
-            {
-                nome = empresaDTO.Nome,
-                id = empresaDTO.id,
-                estagios = empresaDTO.estagios   
-            };
+            var empresa = new Empresa(empresaDTO);
 
             await _EmpresaRepository.AdicionarAsync(empresa);
-            return CreatedAtAction(nameof(ObterEmpresa), new { id = empresa.id}, empresa);
+            return CreatedAtAction(nameof(ObterEmpresa), new { id = empresa.Id}, empresa);
         }
 
-                [HttpPut("Empresas/{id}")]
+        [HttpPut("Empresas/{id}")]
         public async Task<IActionResult> AtualizarEmpresa(int id, EmpresaDTO empresaDto) 
         {
             var empresa = await _EmpresaRepository.ObterPorIdAsync(id);
             if (empresa == null)
                 return NotFound();
             
-            empresa.nome = empresaDto.Nome;
-            empresa.id = empresaDto.id;
-            empresa.estagios = empresaDto.estagios;
+            empresa.Nome = empresaDto.Nome;
 
             await _EmpresaRepository.AtualizarAsync(empresa);
             return NoContent();

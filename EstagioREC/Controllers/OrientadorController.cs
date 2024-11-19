@@ -33,18 +33,13 @@ namespace EstagioREC.Controller
         [HttpPost("orientadores/")]
         public async Task<ActionResult<Orientador>> CriarOrientador(OrientadorDTO orientadorDTO)
         {
-            var orientador = new Orientador
-            {
-                Nome = orientadorDTO.Nome,
-                Email = orientadorDTO.Email,
-                Telefone = orientadorDTO.Telefone    
-            };
+            var orientador = new Orientador(orientadorDTO);
 
             await _orientadorRepository.AdicionarAsync(orientador);
             return CreatedAtAction(nameof(ObterOrientador), new { id = orientador.Id}, orientador);
         }
 
-                [HttpPut("orientadores/{id}")]
+        [HttpPut("orientadores/{id}")]
         public async Task<IActionResult> AtualizarOrientador(int id, OrientadorDTO orientadorDTO) 
         {
             var orientador = await _orientadorRepository.ObterPorIdAsync(id);

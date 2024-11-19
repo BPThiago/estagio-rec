@@ -33,12 +33,7 @@ namespace EstagioREC.Controller
         [HttpPost("alunos/")]
         public async Task<ActionResult<Aluno>> CriarAluno(AlunoDTO alunoDTO)
         {
-            var aluno = new Aluno
-            {
-                Nome = alunoDTO.Nome,
-                Matricula = alunoDTO.Matricula,
-
-            };
+            var aluno = new Aluno(alunoDTO);
 
             await _alunoRepository.AdicionarAsync(aluno);
             return CreatedAtAction(nameof(ObterAluno), new { id = aluno.Id}, aluno);

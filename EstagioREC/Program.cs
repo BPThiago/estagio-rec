@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using EstagioREC.Data;
 using EstagioREC.Repository;
+using EstagioREC.Repository.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Esta
 builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
 builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+builder.Services.AddScoped<IEstagioRepository, EstagioRepository>();
 
 var app = builder.Build();
 
