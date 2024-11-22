@@ -24,7 +24,7 @@ namespace EstagioREC.Data
 
             modelBuilder.Entity<Estagio>()
                 .HasOne(o => o.Orientador)
-                .WithMany(o => o.Estagios) 
+                .WithMany(e => e.Estagios) 
                 .HasForeignKey(o => o.OrientadorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
