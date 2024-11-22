@@ -5,7 +5,7 @@ namespace EstagioREC.Model
         public string Nome { get; set; }
         public string? Email { get; set; }
         public string? Telefone { get; set; }
-
+        public ICollection<Estagio> Estagios;
 
         public Orientador() { }
 
@@ -15,6 +15,7 @@ namespace EstagioREC.Model
             Nome = orientadorDTO.Nome;
             Email = orientadorDTO.Email;
             Telefone = orientadorDTO.Telefone;
+            Estagios = new List<Estagio>();
         }
     }
 }

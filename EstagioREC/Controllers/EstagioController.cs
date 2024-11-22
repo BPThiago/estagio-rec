@@ -84,5 +84,11 @@ namespace EstagioREC.Controllers
             await _estagioRepository.DeletarAsync(id);
             return NoContent();
         }
+
+        [HttpGet("estagios/orientador/{orientadorId}")]
+        public async Task<ActionResult<IEnumerable<EstagioResponseDTO>>> ListarEstagiosPorOrientador(int orientadorId) {
+            var estagios = await _estagioRepository.ObterPorOrientadorAsync(orientadorId);
+            return Ok(estagios);
+        }
     }
 }

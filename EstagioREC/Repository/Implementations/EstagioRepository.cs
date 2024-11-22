@@ -85,5 +85,25 @@ namespace EstagioREC.Repository.Implementations
             _context.Estagios.Remove(estagio);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<EstagioResponseDTO>> ObterPorOrientadorAsync(int orientadorId) {
+            return await _context.Orientadores
+                .Include(o => o.Estagios)
+                .Where(o => o.Id == orientadorId)
+                .SelectMany(o => o.Estagios)
+                .Include(e => e.Aluno)
+                .Include(e => e.Orientador)
+                .Include(e => e.Empresa)
+                .Select(e => new EstagioResponseDTO(
+                    e.Id,
+                    e.DatIni,
+                    e.DatFim,
+                    e.Situacao,
+                    new AlunoDTO(e.Aluno.Id, e.Aluno.Nome, e.Aluno.Matricula),
+                    new OrientadorDTO(e.Orientador.Id, e.Orientador.Nome, e.Orientador.Email, e.Orientador.Telefone),
+                    new EmpresaDTO(e.Empresa.Id, e.Empresa.Nome)
+                ))
+                .ToListAsync();
+        }
     }
 }

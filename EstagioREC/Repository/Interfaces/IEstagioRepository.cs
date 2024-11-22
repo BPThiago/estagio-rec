@@ -10,5 +10,6 @@ namespace EstagioREC.Repository
         Task<EstagioResponseDTO> AdicionarAsync(Estagio estagio);
         Task AtualizarAsync(Estagio estagio);
         Task DeletarAsync(int id);
+        Task<IEnumerable<EstagioResponseDTO>> ObterPorOrientadorAsync(int orientadorId);
     }
 }

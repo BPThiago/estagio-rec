@@ -1,15 +1,18 @@
-﻿namespace EstagioREC.Model;
+﻿using EstagioREC.Model.DTOs;
 
-public class Empresa
+namespace EstagioREC.Model
 {
-    public int Id { get; set; }
-    public String Nome { get; set; }
-
-    public Empresa() { }
-
-    public Empresa(EmpresaDTO empresaDTO)
+    public class Empresa
     {
-        Id = empresaDTO.Id;
-        Nome = empresaDTO.Nome;
+        public int Id { get; set; }
+        public String Nome { get; set; }
+
+        public Empresa() { }
+
+        public Empresa(EmpresaDTO empresaDTO)
+        {
+            Id = empresaDTO.Id;
+            Nome = empresaDTO.Nome;
+        }
     }
 }

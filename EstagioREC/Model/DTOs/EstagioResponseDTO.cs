@@ -18,7 +18,7 @@
             this.Situacao = situacao;
             this.AlunoDTO = alunoDTO;
             this.OrientadorDTO= orientadorDTO;
-            this.OrientadorDTO = orientadorDTO;
+            this.EmpresaDTO = empresaDTO;
         }
     }
 }

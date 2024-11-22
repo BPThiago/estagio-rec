@@ -1,4 +1,5 @@
 ﻿using EstagioREC.Model;
+using EstagioREC.Model.DTOs;
 using EstagioREC.Repository;
 using Microsoft.AspNetCore.Mvc;
 
