@@ -7,6 +7,7 @@ namespace EstagioREC.Data
     public class DbInitializer
     {
         private static readonly string _spreadsheetId = "1OM2DzrsbXG4alxcPqYOTRCTH9GxOsYgIfGPxEY8vFVc";
+        private static readonly string _apiKey = "AIzaSyAq6XkFHMXZiqH1iY6qiJDoPuDk_he2Gbk";
 
         public static void RetrieveFromSheets(IApplicationBuilder app) {
             using (var serviceScope = app.ApplicationServices.CreateScope()) 
@@ -16,12 +17,9 @@ namespace EstagioREC.Data
                 if (context == null || context.Orientadores.Any()) 
                     return;
                 
-                var credential = GoogleCredential.FromFile("client-secrets.json")
-                    .CreateScoped(SheetsService.Scope.Spreadsheets);
-
                 var serviceSheets = new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
                 {
-                    HttpClientInitializer = credential,
+                    ApiKey = _apiKey,
                     ApplicationName = "EstagioREC"
                 });
 
