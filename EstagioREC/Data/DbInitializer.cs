@@ -25,6 +25,10 @@ namespace EstagioREC.Data
                     ApplicationName = "EstagioREC"
                 });
 
+                var alunosMap = new Dictionary<string, int>();
+                var orientadoresMap = new Dictionary<string, int>();
+                var empresaMap = new Dictionary<string, int>();
+
                 // Obter orientadores da planilha
                 var request = serviceSheets.Spreadsheets.Values.Get(_spreadsheetId, "orientador");
                 var response = request.Execute();
@@ -41,6 +45,46 @@ namespace EstagioREC.Data
                     };
 
                     context.Orientadores.Add(orientador);
+                    orientadoresMap.Add(orientador.Nome, orientador.Id);
+                }
+
+                // Obter estagios da planilha
+                request = serviceSheets.Spreadsheets.Values.Get(_spreadsheetId, "estagio");
+                response = request.Execute();
+                values = response.Values;
+
+                if (values == null || values.Count == 0)
+                    return;
+
+                foreach (var row in values.Skip(1)) {
+                    if (!alunosMap.ContainsKey(row[1].ToString())) {
+                        var aluno = new Aluno {
+                            Nome = row[0].ToString(),
+                            Matricula = row[1].ToString()
+                        };
+                        context.Alunos.Add(aluno);
+                        alunosMap.Add(aluno.Matricula, aluno.Id);
+                    }
+                    if (!empresaMap.ContainsKey(row[5].ToString())) {
+                        var empresa = new Empresa {
+                            Nome = row[5].ToString()
+                        };
+                        context.Empresas.Add(empresa);
+                        empresaMap.Add(empresa.Nome, empresa.Id);
+                    }
+                    var alunoId = alunosMap[row[1].ToString()];
+                    var orientadorId = orientadoresMap[row[2].ToString()];
+                    var empresaId = empresaMap[row[5].ToString()];
+                    
+                    var estagio = new Estagio {
+                        DatIni = DateTime.Parse(row[3].ToString()),
+                        DatFim = DateTime.Parse(row[4].ToString()),
+                        Situacao = 0,
+                        AlunoId = alunoId,
+                        OrientadorId = orientadorId,
+                        EmpresaId = empresaId
+                    };
+                    context.Estagios.Add(estagio);
                 }
                 context.SaveChanges();
             }
