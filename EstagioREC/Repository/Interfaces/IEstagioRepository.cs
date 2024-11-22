@@ -11,5 +11,6 @@ namespace EstagioREC.Repository
         Task AtualizarAsync(Estagio estagio);
         Task DeletarAsync(int id);
         Task<IEnumerable<EstagioResponseDTO>> ObterPorOrientadorAsync(int orientadorId);
+        Task<IEnumerable<EstagioResponseDTO>> ObterPorAlunoAsync(int alunoId);
     }
 }
