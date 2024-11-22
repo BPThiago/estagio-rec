@@ -5,12 +5,12 @@
         public int Id { get; set; }
         public DateTime DatIni { get; set; }
         public DateTime DatFim { get; set; }
-        public int Situacao { get; set; }
+        public SituacaoEnum Situacao { get; set; }
         public int EmpresaId {get; set; }
         public int OrientadorId { get; set; }
         public int AlunoId { get; set; }
         
-        public EstagioDTO(int id, DateTime datIni, DateTime datFim, int situacao, int alunoId, int orientadorId, int empresaId)
+        public EstagioDTO(int id, DateTime datIni, DateTime datFim, SituacaoEnum situacao, int alunoId, int orientadorId, int empresaId)
         {
             Id = id;
             this.DatIni = datIni;

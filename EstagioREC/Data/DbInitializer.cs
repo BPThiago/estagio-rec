@@ -76,10 +76,17 @@ namespace EstagioREC.Data
                     var orientadorId = orientadoresMap[row[2].ToString()];
                     var empresaId = empresaMap[row[5].ToString()];
                     
+                    var situacao = row[6].ToString() switch {
+                        "Pendente" => SituacaoEnum.Pendente,
+                        "Andamento" => SituacaoEnum.Andamento,
+                        "Renovado" => SituacaoEnum.Renovado,
+                        _ => SituacaoEnum.Andamento
+                    };
+
                     var estagio = new Estagio {
                         DatIni = DateTime.Parse(row[3].ToString()),
                         DatFim = DateTime.Parse(row[4].ToString()),
-                        Situacao = 0,
+                        Situacao = situacao,
                         AlunoId = alunoId,
                         OrientadorId = orientadorId,
                         EmpresaId = empresaId

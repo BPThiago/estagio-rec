@@ -7,7 +7,7 @@ namespace EstagioREC.Model
         public int Id { get; set; }
         public DateTime DatIni { get; set; }
         public DateTime DatFim { get; set; }
-        public int Situacao { get; set; }
+        public SituacaoEnum Situacao { get; set; }
         public Aluno Aluno { get; set; }
         public int AlunoId { get; set; }
         public Orientador Orientador { get; set; }
