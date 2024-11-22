@@ -17,53 +17,70 @@ namespace EstagioREC.Controllers
         }
 
         [HttpGet("estagios/{id}")]
-        public async Task<ActionResult<Estagio>> ObterEstagio(int id)
+        public async Task<ActionResult<EstagioResponseDTO>> ObterEstagio(int id)
         {
             var estagio = await _estagioRepository.ObterPorIdAsync(id);
             if (estagio == null)
                 return NotFound();
-            return estagio;
+
+            return Ok(estagio);
         }
 
         [HttpGet("estagios/")]
-        public async Task<ActionResult<IEnumerable<Estagio>>> ListarEstagios() 
+        public async Task<ActionResult<IEnumerable<EstagioResponseDTO>>> ListarEstagios()
         {
             return Ok(await _estagioRepository.ObterTodosAsync());
         }
 
         [HttpPost("estagios/")]
-        public async Task<ActionResult<Estagio>> CriarEstagio(EstagioDTO estagioDTO)
+        public async Task<ActionResult<EstagioResponseDTO>> CriarEstagio(EstagioDTO estagioDTO)
         {
-            var estagio = new Estagio(estagioDTO);
+            // Mapear o DTO para a entidade
+            var estagio = new Estagio
+            {
+                DatIni = estagioDTO.DatIni,
+                DatFim = estagioDTO.DatFim,
+                Situacao = estagioDTO.Situacao,
+                AlunoId = estagioDTO.AlunoId,
+                OrientadorId = estagioDTO.OrientadorId,
+                EmpresaId = estagioDTO.EmpresaId
+            };
 
-            await _estagioRepository.AdicionarAsync(estagio);
-            return CreatedAtAction(nameof(ObterEstagio), new { id = estagio.Id}, estagio);
+            var estagioCriado = await _estagioRepository.AdicionarAsync(estagio);
+
+            return CreatedAtAction(nameof(ObterEstagio), new { id = estagioCriado.Id }, estagioCriado);
         }
 
         [HttpPut("estagios/{id}")]
         public async Task<IActionResult> AtualizarEstagio(int id, EstagioDTO estagioDTO)
         {
-            var estagio = await _estagioRepository.ObterPorIdAsync(id);
-            if (estagio == null) return NotFound();
-            
-            estagio.DatIni = estagioDTO.DatIni;
-            estagio.DatFim = estagioDTO.DatFim;
-            estagio.Situacao = estagioDTO.Situacao;
-            estagio.AlunoId = estagioDTO.AlunoId;
-            estagio.OrientadorId = estagioDTO.OrientadorId;
-            estagio.EmpresaId = estagioDTO.EmpresaId;
+            var estagioExistente = await _estagioRepository.ObterPorIdAsync(id);
+            if (estagioExistente == null)
+                return NotFound();
+
+            // Mapear os valores do DTO para a entidade
+            var estagio = new Estagio
+            {
+                Id = id,
+                DatIni = estagioDTO.DatIni,
+                DatFim = estagioDTO.DatFim,
+                Situacao = estagioDTO.Situacao,
+                AlunoId = estagioDTO.AlunoId,
+                OrientadorId = estagioDTO.OrientadorId,
+                EmpresaId = estagioDTO.EmpresaId
+            };
 
             await _estagioRepository.AtualizarAsync(estagio);
             return NoContent();
         }
 
         [HttpDelete("estagios/{id}")]
-        public async Task<IActionResult> DeletarEstagio(int id) 
+        public async Task<IActionResult> DeletarEstagio(int id)
         {
             var estagio = await _estagioRepository.ObterPorIdAsync(id);
             if (estagio == null)
                 return NotFound();
-            
+
             await _estagioRepository.DeletarAsync(id);
             return NoContent();
         }

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\DTOs\EstagioDTO - Cópia.cs" />
     <Compile Remove="Model\Entities\Estagiario.cs" />
   </ItemGroup>
 

@@ -45,7 +45,7 @@ Content-Type: application/json
 
 ###
 
-GET {{estagio_webapi_HostAddress}}/alunos/
+GET {{estagio_webapi_HostAddress}}/alunos/1
 Content-Type: application/json
 
 ###
@@ -106,18 +106,3 @@ Content-Type: application/json
 
 GET {{estagio_webapi_HostAddress}}/estagios/
 
-###
-
-PUT {{estagio_webapi_HostAddress}}/estagios/1
-Content-Type: application/json
-
-{
-  "aluno": {
-    "nome": "Francisco",
-    "matricula": "20221bsi0009"
-   },
-  "orientador": {
-    "nome":"Fernandinho",
-    "email":"Fer@gmail.com"},
-  "empresa": {"nome":"REC"}
-}
