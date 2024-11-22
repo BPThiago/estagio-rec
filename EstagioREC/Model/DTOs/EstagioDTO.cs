@@ -6,19 +6,19 @@
         public DateTime DatIni { get; set; }
         public DateTime DatFim { get; set; }
         public int Situacao { get; set; }
-        public EmpresaDTO Empresa { get; set; }
-        public OrientadorDTO Orientador { get; set; }
-        public AlunoDTO Aluno { get; set; }
+        public int EmpresaId {get; set; }
+        public int OrientadorId { get; set; }
+        public int AlunoId { get; set; }
         
-        public EstagioDTO(int id, DateTime datIni, DateTime datFim, int situacao, EmpresaDTO empresa, OrientadorDTO orientador, AlunoDTO aluno)
+        public EstagioDTO(int id, DateTime datIni, DateTime datFim, int situacao, int alunoId, int orientadorId, int empresaId)
         {
             Id = id;
             this.DatIni = datIni;
             this.DatFim = datFim;
             this.Situacao = situacao;
-            this.Empresa = empresa;
-            this.Orientador = orientador;
-            this.Aluno = aluno;
+            this.AlunoId = alunoId;
+            this.OrientadorId = orientadorId;
+            this.EmpresaId = empresaId;
         }
     }
 }

@@ -49,9 +49,9 @@ namespace EstagioREC.Controllers
             estagio.DatIni = estagioDTO.DatIni;
             estagio.DatFim = estagioDTO.DatFim;
             estagio.Situacao = estagioDTO.Situacao;
-            estagio.Aluno = new Aluno(estagioDTO.Aluno);
-            estagio.Orientador = new Orientador(estagioDTO.Orientador);
-            estagio.Empresa = new Empresa(estagioDTO.Empresa);
+            estagio.AlunoId = estagioDTO.AlunoId;
+            estagio.OrientadorId = estagioDTO.OrientadorId;
+            estagio.EmpresaId = estagioDTO.EmpresaId;
 
             await _estagioRepository.AtualizarAsync(estagio);
             return NoContent();

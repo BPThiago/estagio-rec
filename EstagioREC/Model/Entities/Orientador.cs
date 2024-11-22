@@ -6,6 +6,7 @@ namespace EstagioREC.Model
         public string? Email { get; set; }
         public string? Telefone { get; set; }
 
+
         public Orientador() { }
 
         public Orientador(OrientadorDTO orientadorDTO)

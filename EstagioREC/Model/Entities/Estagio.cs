@@ -9,8 +9,11 @@ namespace EstagioREC.Model
         public DateTime DatFim { get; set; }
         public int Situacao { get; set; }
         public Aluno Aluno { get; set; }
+        public int AlunoId { get; set; }
         public Orientador Orientador { get; set; }
+        public int OrientadorId { get; set; }
         public Empresa Empresa { get; set; }
+        public int EmpresaId { get; set; }
 
         public Estagio() { }
 
@@ -20,9 +23,10 @@ namespace EstagioREC.Model
             DatIni = estagioDTO.DatIni;
             DatFim = estagioDTO.DatFim;
             Situacao = estagioDTO.Situacao;
-            Aluno = new Aluno(estagioDTO.Aluno);
-            Orientador = new Orientador(estagioDTO.Orientador);
-            Empresa = new Empresa(estagioDTO.Empresa);
+            AlunoId = estagioDTO.AlunoId;
+            OrientadorId = estagioDTO.OrientadorId;
+            EmpresaId = estagioDTO.EmpresaId;
         }
     }
 }
+    

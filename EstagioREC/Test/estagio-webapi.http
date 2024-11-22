@@ -11,6 +11,10 @@ Content-Type: application/json
 
 ###
 
+GET {{estagio_webapi_HostAddress}}/orientadores
+
+###
+
 GET {{estagio_webapi_HostAddress}}/orientadores/21
 Content-Type: application/json
 
@@ -89,16 +93,10 @@ POST {{estagio_webapi_HostAddress}}/estagios/
 Content-Type: application/json
 
 {
-  "aluno": {
-    "nome": "Thiago",
-    "matricula": "20221bsi0344"
-   },
-  "orientador": {
-    "nome":"Roberto Carlos",
-    "email":"essecarasoueu@email.com",
-    "telefone":"(27)98888-8888" 
-   },
-  "empresa": {"nome":"REC"},
+  "alunoId": 1,
+  "orientadorId": 1,
+  "situacao":1,
+  "empresaId": 1,
   "dataInicio": "2021-09-01",
   "dataFim": "2022-09-01",
   "status": 1

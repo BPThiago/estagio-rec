@@ -13,5 +13,29 @@ namespace EstagioREC.Data
         public DbSet<Aluno> Alunos => Set<Aluno>();
         public DbSet<Empresa> Empresas => Set<Empresa>();
         public DbSet<Estagio> Estagios => Set<Estagio>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configuração do relacionamento entre Estagio e Aluno
+            modelBuilder.Entity<Estagio>()
+                .HasOne(e => e.Aluno)
+                .WithMany() // Caso Aluno tenha uma coleção de Estagios
+                .HasForeignKey(e => e.AlunoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuração do relacionamento entre Estagio e Orientador
+            modelBuilder.Entity<Estagio>()
+                .HasOne(e => e.Orientador)
+                .WithMany() // Caso Orientador tenha uma coleção de Estagios
+                .HasForeignKey(e => e.OrientadorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configuração do relacionamento entre Estagio e Empresa
+            modelBuilder.Entity<Estagio>()
+                .HasOne(e => e.Empresa)
+                .WithMany()
+                .HasForeignKey(e => e.EmpresaId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }
