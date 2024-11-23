@@ -12,5 +12,6 @@ namespace EstagioREC.Repository
         Task DeletarAsync(int id);
         Task<IEnumerable<EstagioResponseDTO>> ObterPorOrientadorAsync(int orientadorId);
         Task<IEnumerable<EstagioResponseDTO>> ObterPorAlunoAsync(int alunoId);
+        Task<IEnumerable<EstagioResponseDTO>> ObterPorEmpresaAsync(int empresaId);
     }
 }

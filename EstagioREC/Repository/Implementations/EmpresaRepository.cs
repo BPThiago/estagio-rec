@@ -48,5 +48,6 @@ namespace EstagioREC.Repository
             _context.Empresas.Remove(empresa);
             await _context.SaveChangesAsync();
         }
+        
     }
 }

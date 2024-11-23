@@ -6,6 +6,7 @@ namespace EstagioREC.Model
     {
         public int Id { get; set; }
         public String Nome { get; set; }
+        public ICollection<Estagio> Estagios;
 
         public Empresa() { }
 
@@ -13,6 +14,7 @@ namespace EstagioREC.Model
         {
             Id = empresaDTO.Id;
             Nome = empresaDTO.Nome;
+            Estagios = new List<Estagio>();
         }
     }
 }

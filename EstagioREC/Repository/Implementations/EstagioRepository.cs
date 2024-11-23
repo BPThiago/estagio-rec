@@ -126,5 +126,24 @@ namespace EstagioREC.Repository.Implementations
                 .ToListAsync();
         }
         
+        public async Task<IEnumerable<EstagioResponseDTO>> ObterPorEmpresaAsync(int empresaId) {
+            return await _context.Empresas
+                .Include(e => e.Estagios)
+                .Where(e => e.Id == empresaId)
+                .SelectMany(e => e.Estagios)
+                .Include(e => e.Aluno)
+                .Include(e => e.Orientador)
+                .Include(e => e.Empresa)
+                .Select(e => new EstagioResponseDTO(
+                    e.Id,
+                    e.DatIni,
+                    e.DatFim,
+                    e.Situacao,
+                    new AlunoDTO(e.Aluno.Id, e.Aluno.Nome, e.Aluno.Matricula),
+                    new OrientadorDTO(e.Orientador.Id, e.Orientador.Nome, e.Orientador.Email, e.Orientador.Telefone),
+                    new EmpresaDTO(e.Empresa.Id, e.Empresa.Nome)
+                ))
+                .ToListAsync();
+        }
     }
 }
