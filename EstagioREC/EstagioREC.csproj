@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
@@ -18,8 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\DTOs\EstagioDTO - Cópia.cs" />
-    <Compile Remove="Model\Entities\Estagiario.cs" />
+    <Compile Remove="Domain\Entities\Estagiario.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\UseCases\OrientadorUseCases\DeletarOrientador\" />
+    <Folder Include="Application\UseCases\OrientadorUseCases\ObterTodosOrientador\" />
+    <Folder Include="Application\UseCases\OrientadorUseCases\ObterOrientador\" />
   </ItemGroup>
 
 </Project>

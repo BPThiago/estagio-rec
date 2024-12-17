@@ -1,68 +1,74 @@
-using EstagioREC.Model;
-using EstagioREC.Repository;
+using EstagioREC.Application.UseCases.OrientadorUseCases.AdicionarOrientador;
+using EstagioREC.Application.UseCases.OrientadorUseCases.AtualizarOrientador;
+using EstagioREC.Application.UseCases.OrientadorUseCases.DeletarOrientador;
+using EstagioREC.Application.UseCases.OrientadorUseCases.ObterOrientador;
+using EstagioREC.Application.UseCases.OrientadorUseCases.ObterTodosOrientador;
+using EstagioREC.Domain;
+using EstagioREC.Persistence.Repository.Interfaces;
+using Google.Apis.Sheets.v4.Data;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
-namespace EstagioREC.Controller 
+namespace EstagioREC.Controller
 {
     [ApiController]
     [Route("/")]
     public class OrientadorController : ControllerBase
     {
-        private readonly IOrientadorRepository _orientadorRepository;
+        private readonly IMediator _mediator;
 
-        public OrientadorController(IOrientadorRepository orientadorRepository)
+        public OrientadorController(IMediator mediator)
         {
-            _orientadorRepository = orientadorRepository;
+            _mediator = mediator;
         }
 
         [HttpGet("orientadores/{id}")]
-        public async Task<ActionResult<Orientador>> ObterOrientador(int id)
+        public async Task<ActionResult<ObterOrientadorResponse>> ObterOrientador(int id, CancellationToken cancellationToken)
         {
-            var orientador = await _orientadorRepository.ObterPorIdAsync(id);
-            if (orientador == null)
-                return NotFound();
-            return orientador;
+            var obterOrientadorRequest = new ObterOrientadorRequest(id);
+            var response = await _mediator.Send(obterOrientadorRequest, cancellationToken);
+            return Ok(response);
         }
 
         [HttpGet("orientadores/")]
-        public async Task<ActionResult<IEnumerable<Orientador>>> ListarOrientadores() 
+        public async Task<ActionResult<List<ObterTodosOrientadorResponse>>> ListarOrientadores(CancellationToken cancellationToken) 
         {
-            return Ok(await _orientadorRepository.ObterTodosAsync());
+            var response = await _mediator.Send(new ObterTodosOrientadorRequest(), cancellationToken);
+            return Ok(response);
         }
 
         [HttpPost("orientadores/")]
-        public async Task<ActionResult<Orientador>> CriarOrientador(OrientadorDTO orientadorDTO)
+        public async Task<ActionResult<AdicionarOrientadorResponse>> CriarOrientador(AdicionarOrientadorRequest request)
         {
-            var orientador = new Orientador(orientadorDTO);
-
-            await _orientadorRepository.AdicionarAsync(orientador);
-            return CreatedAtAction(nameof(ObterOrientador), new { id = orientador.Id}, orientador);
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpPut("orientadores/{id}")]
-        public async Task<IActionResult> AtualizarOrientador(int id, OrientadorDTO orientadorDTO) 
+        public async Task<ActionResult<AtualizarOrientadorResponse>> AtualizarOrientador(int id, AtualizarOrientadorRequest request, CancellationToken cancellationToken) 
         {
-            var orientador = await _orientadorRepository.ObterPorIdAsync(id);
-            if (orientador == null)
-                return NotFound();
-            
-            orientador.Nome = orientadorDTO.Nome;
-            orientador.Email = orientadorDTO.Email;
-            orientador.Telefone = orientadorDTO.Telefone;
+            if (id != request.Id)
+            {
+                return BadRequest();
+            }
 
-            await _orientadorRepository.AtualizarAsync(orientador);
-            return NoContent();
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
         }
 
         [HttpDelete("orientadores/{id}")]
-        public async Task<IActionResult> DeletarOrientador(int id) 
+        public async Task<ActionResult<DeletarOrientadorResponse>> DeletarOrientador(int? id, DeletarOrientadorRequest request, CancellationToken cancellationToken)
         {
-            var orientador = await _orientadorRepository.ObterPorIdAsync(id);
-            if (orientador == null)
-                return NotFound();
-            
-            await _orientadorRepository.DeletarAsync(id);
-            return NoContent();
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
+            var deletarOrientadorRequest = new DeletarOrientadorRequest(id.Value);
+
+            var response = await _mediator.Send(deletarOrientadorRequest, cancellationToken);
+            return Ok(response);
         }
     }
 }

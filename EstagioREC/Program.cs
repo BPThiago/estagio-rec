@@ -1,18 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using EstagioREC.Data;
-using EstagioREC.Repository;
-using EstagioREC.Repository.Implementations;
+using EstagioREC.Persistence.Data;
+using EstagioREC.Persistence.Repository.Implementations;
+using EstagioREC.Persistence.Repository.Interfaces;
+using EstagioREC.Persistence;
+using EstagioREC.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigurePersistenceApp(builder.Configuration);
+builder.Services.ConfigureApplicationApp();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Estagio"));
-
-builder.Services.AddScoped<IOrientadorRepository, OrientadorRepository>();
-builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
-builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
-builder.Services.AddScoped<IEstagioRepository, EstagioRepository>();
 
 var app = builder.Build();
 

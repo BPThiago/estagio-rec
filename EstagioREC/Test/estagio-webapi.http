@@ -24,6 +24,7 @@ PUT {{estagio_webapi_HostAddress}}/orientadores/21
 Content-Type: application/json
 
 {
+    "id": 21,
     "nome":"Roberto Carlos",
     "email":"tantasemocoes@email.com",
     "telefone":"(27)98888-8888"
