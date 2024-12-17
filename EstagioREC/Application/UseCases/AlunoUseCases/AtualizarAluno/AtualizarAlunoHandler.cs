@@ -18,7 +18,7 @@ public class AtualizarAlunoHandler : IRequestHandler<AtualizarAlunoRequest, Atua
     public async Task<AtualizarAlunoResponse> Handle(AtualizarAlunoRequest request,
         CancellationToken cancellationToken)
     {
-        var aluno = await _alunoRepository.ObterPorIdAsync(request.Id);
+        var aluno = await _alunoRepository.ObterPorIdAsync(request.Id, cancellationToken);
 
         if (aluno is null)
             return default;
@@ -26,7 +26,7 @@ public class AtualizarAlunoHandler : IRequestHandler<AtualizarAlunoRequest, Atua
         aluno.Nome = request.Nome;
         aluno.Matricula = request.Matricula;
 
-        await _alunoRepository.AtualizarAsync(aluno);
+        await _alunoRepository.AtualizarAsync(aluno, cancellationToken);
         
         return _mapper.Map<AtualizarAlunoResponse>(aluno);
     }

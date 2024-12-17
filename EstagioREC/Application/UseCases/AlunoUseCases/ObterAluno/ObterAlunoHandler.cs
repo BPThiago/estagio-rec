@@ -17,7 +17,7 @@ public sealed class ObterAlunoHandler : IRequestHandler<ObterAlunoRequest, Obter
 
     public async Task<ObterAlunoResponse> Handle(ObterAlunoRequest request, CancellationToken cancellationToken)
     {
-        var aluno = await _alunoRepository.ObterPorIdAsync(request.Id);
+        var aluno = await _alunoRepository.ObterPorIdAsync(request.Id, cancellationToken);
         return _mapper.Map<ObterAlunoResponse>(aluno);
     }
 }

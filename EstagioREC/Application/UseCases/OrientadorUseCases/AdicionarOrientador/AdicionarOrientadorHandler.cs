@@ -19,7 +19,7 @@ namespace EstagioREC.Application.UseCases.OrientadorUseCases.AdicionarOrientador
         public async Task<AdicionarOrientadorResponse> Handle(AdicionarOrientadorRequest request, CancellationToken cancellationToken)
         {
             var orientador = _mapper.Map<Orientador>(request);
-            await _orientadorRepository.AdicionarAsync(orientador);
+            await _orientadorRepository.AdicionarAsync(orientador, cancellationToken);
             return _mapper.Map<AdicionarOrientadorResponse>(orientador);
         }
     }

@@ -19,7 +19,7 @@ namespace EstagioREC.Application.UseCases.AlunoUseCases.AdicionarAluno
         public async Task<AdicionarAlunoResponse> Handle(AdicionarAlunoRequest request, CancellationToken cancellationToken)
         {
             var aluno = _mapper.Map<Aluno>(request);
-            await _alunoRepository.AdicionarAsync(aluno);
+            await _alunoRepository.AdicionarAsync(aluno, cancellationToken);
             return _mapper.Map<AdicionarAlunoResponse>(aluno);
         }
     }

@@ -17,7 +17,7 @@ public sealed class ObterOrientadorHandler : IRequestHandler<ObterOrientadorRequ
 
     public async Task<ObterOrientadorResponse> Handle(ObterOrientadorRequest request, CancellationToken cancellationToken)
     {
-        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id);
+        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id, cancellationToken);
         return _mapper.Map<ObterOrientadorResponse>(orientador);
     }
 }

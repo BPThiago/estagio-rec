@@ -17,7 +17,7 @@ public sealed class ObterTodosAlunoHandler : IRequestHandler<ObterTodosAlunoRequ
 
     public async Task<List<ObterTodosAlunoResponse>> Handle(ObterTodosAlunoRequest request, CancellationToken cancellationToken)
     { 
-        var alunos = await _alunoRepository.ObterTodosAsync();
+        var alunos = await _alunoRepository.ObterTodosAsync(cancellationToken);
         return _mapper.Map<List<ObterTodosAlunoResponse>>(alunos);
     }
 }

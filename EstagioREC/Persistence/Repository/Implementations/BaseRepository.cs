@@ -14,32 +14,32 @@ namespace EstagioREC.Persistence.Repository.Implementations
             _context = context;
         }
 
-        public async Task<T> ObterPorIdAsync(int id)
+        public async Task<T> ObterPorIdAsync(int id, CancellationToken cancellationToken)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public async Task<IEnumerable<T>> ObterTodosAsync()
+        public async Task<IEnumerable<T>> ObterTodosAsync(CancellationToken cancellationToken)
         {
-            return await _context.Set<T>().ToListAsync();
+            return await _context.Set<T>().ToListAsync(cancellationToken);
         }
 
-        public async Task<T> AdicionarAsync(T entity)
+        public async Task<T> AdicionarAsync(T entity, CancellationToken cancellationToken)
         {
             _context.Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
-        public async Task AtualizarAsync(T entity)
+        public async Task AtualizarAsync(T entity, CancellationToken cancellationToken)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task DeletarAsync(T entity)
+        public async Task DeletarAsync(T entity, CancellationToken cancellationToken)
         {
             _context.Remove(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -18,12 +18,12 @@ namespace EstagioREC.Application.UseCases.AlunoUseCases.DeletarAluno;
         public async Task<DeletarAlunoResponse> Handle(DeletarAlunoRequest request,
             CancellationToken cancellationToken)
         {
-            var aluno = await _alunoRepository.ObterPorIdAsync(request.Id);
+            var aluno = await _alunoRepository.ObterPorIdAsync(request.Id, cancellationToken);
 
             if (aluno is null)
                 return default;
         
-            await _alunoRepository.DeletarAsync(aluno);
+            await _alunoRepository.DeletarAsync(aluno, cancellationToken);
         
             return _mapper.Map<DeletarAlunoResponse>(aluno);
         }

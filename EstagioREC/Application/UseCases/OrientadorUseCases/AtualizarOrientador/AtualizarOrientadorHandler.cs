@@ -18,7 +18,7 @@ public class AtualizarOrientadorHandler : IRequestHandler<AtualizarOrientadorReq
     public async Task<AtualizarOrientadorResponse> Handle(AtualizarOrientadorRequest request,
         CancellationToken cancellationToken)
     {
-        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id);
+        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id, cancellationToken);
 
         if (orientador is null)
             return default;
@@ -27,7 +27,7 @@ public class AtualizarOrientadorHandler : IRequestHandler<AtualizarOrientadorReq
         orientador.Email = request.Email;
         orientador.Telefone = request.Telefone;
 
-        await _orientadorRepository.AtualizarAsync(orientador);
+        await _orientadorRepository.AtualizarAsync(orientador, cancellationToken);
         
         return _mapper.Map<AtualizarOrientadorResponse>(orientador);
     }

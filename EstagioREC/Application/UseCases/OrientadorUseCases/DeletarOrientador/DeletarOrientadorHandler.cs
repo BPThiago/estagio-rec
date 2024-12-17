@@ -18,12 +18,12 @@ public class DeletarOrientadorHandler : IRequestHandler<DeletarOrientadorRequest
     public async Task<DeletarOrientadorResponse> Handle(DeletarOrientadorRequest request,
         CancellationToken cancellationToken)
     {
-        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id);
+        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id, cancellationToken);
 
         if (orientador is null)
             return default;
         
-        await _orientadorRepository.DeletarAsync(orientador);
+        await _orientadorRepository.DeletarAsync(orientador, cancellationToken);
         
         return _mapper.Map<DeletarOrientadorResponse>(orientador);
     }
