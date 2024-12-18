@@ -5,7 +5,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 5000
-EXPOSE 5001
 
 
 # Esta fase é usada para compilar o projeto de serviço
@@ -27,9 +26,5 @@ RUN dotnet publish "./EstagioREC.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-# Instalação do certificado de desenvolvimento
-RUN dotnet dev-certs https
-RUN dotnet dev-certs https --trust
 
 ENTRYPOINT ["dotnet", "EstagioREC.dll"]

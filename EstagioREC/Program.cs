@@ -1,9 +1,10 @@
-using Microsoft.EntityFrameworkCore;
 using EstagioREC.Data;
-using EstagioREC.Repository;
 using EstagioREC.Repository.Implementations;
+using EstagioREC.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -16,6 +17,7 @@ builder.Services.AddScoped<IEstagioRepository, EstagioRepository>();
 
 var app = builder.Build();
 
+// Inicialização do banco de dados
 DbInitializer.RetrieveFromSheets(app);
 app.MapControllers();
 
