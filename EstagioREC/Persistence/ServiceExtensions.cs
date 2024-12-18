@@ -12,8 +12,8 @@ namespace EstagioREC.Persistence
             services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Estagio"));
 
             services.AddScoped<IOrientadorRepository, OrientadorRepository>();
-            services.AddScoped<IAlunoRepository, AlunoRepository>(); // TODO: Implementar
-            //services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IAlunoRepository, AlunoRepository>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
             //services.AddScoped<IEstagioRepository, EstagioRepository>();
         }
     }
