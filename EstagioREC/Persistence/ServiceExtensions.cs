@@ -14,7 +14,7 @@ namespace EstagioREC.Persistence
             services.AddScoped<IOrientadorRepository, OrientadorRepository>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
-            //services.AddScoped<IEstagioRepository, EstagioRepository>();
+            services.AddScoped<IEstagioRepository, EstagioRepository>();
         }
     }
 }

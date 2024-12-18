@@ -1,3 +1,4 @@
+using System.Globalization;
 using Google.Apis.Sheets.v4;
 using EstagioREC.Domain;
 using EstagioREC.Domain.Enums;
@@ -92,8 +93,8 @@ namespace EstagioREC.Persistence.Data
 
                     var estagio = new Estagio
                     {
-                        DatIni = DateTime.Parse(row[3].ToString()),
-                        DatFim = DateTime.Parse(row[4].ToString()),
+                        DatIni = DateTime.ParseExact(row[3].ToString(), "d/M/yyyy", CultureInfo.InvariantCulture),
+                        DatFim = DateTime.ParseExact(row[4].ToString(), "d/M/yyyy", CultureInfo.InvariantCulture),
                         Situacao = situacao,
                         AlunoId = alunoId,
                         OrientadorId = orientadorId,
