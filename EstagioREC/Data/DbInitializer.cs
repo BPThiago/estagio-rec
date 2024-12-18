@@ -1,6 +1,7 @@
 using Google.Apis.Sheets.v4;
 using Google.Apis.Auth.OAuth2;
 using EstagioREC.Model;
+using System.Globalization;
 
 namespace EstagioREC.Data
 {
@@ -80,16 +81,25 @@ namespace EstagioREC.Data
                         "Renovado" => SituacaoEnum.Renovado,
                         _ => SituacaoEnum.Andamento
                     };
-
-                    var estagio = new Estagio {
-                        DatIni = DateTime.Parse(row[3].ToString()),
-                        DatFim = DateTime.Parse(row[4].ToString()),
-                        Situacao = situacao,
-                        AlunoId = alunoId,
-                        OrientadorId = orientadorId,
-                        EmpresaId = empresaId
-                    };
-                    context.Estagios.Add(estagio);
+                    var dateFormats = new[] { "d-M-yyyy", "dd/MM/yyyy" }; // Add more formats if needed
+                    if (DateTime.TryParseExact(row[3].ToString(), dateFormats, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out var datIni) &&
+                        DateTime.TryParseExact(row[4].ToString(), dateFormats, System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out var datFim))
+                    {
+                        var estagio = new Estagio
+                        {
+                            DatIni = datIni,
+                            DatFim = datFim,
+                            Situacao = situacao,
+                            AlunoId = alunoId,
+                            OrientadorId = orientadorId,
+                            EmpresaId = empresaId
+                        };
+                        context.Estagios.Add(estagio);
+                    }
+                    else
+                    {
+                        // Handle invalid date format, e.g., log the error or skip the row
+                    }
                 }
                 context.SaveChanges();
             }

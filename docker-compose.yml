@@ -1,0 +1,9 @@
+services:
+  estagiorec:
+    image: ${DOCKER_REGISTRY-}estagiorec
+    build:
+      context: .
+      dockerfile: EstagioREC/Dockerfile
+    ports:
+        - "5000:5000"
+        - "5001:5001"
