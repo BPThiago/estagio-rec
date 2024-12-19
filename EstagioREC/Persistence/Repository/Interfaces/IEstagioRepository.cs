@@ -4,10 +4,9 @@ namespace EstagioREC.Persistence.Repository.Interfaces
 {
     public interface IEstagioRepository : IBaseRepository<Estagio>
     {
-        /*
-        Task<IEnumerable<EstagioResponseDTO>> ObterPorOrientadorAsync(int orientadorId);
-        Task<IEnumerable<EstagioResponseDTO>> ObterPorAlunoAsync(int alunoId);
-        Task<IEnumerable<EstagioResponseDTO>> ObterPorEmpresaAsync(int empresaId);
-        */
+        public Task <IEnumerable<Estagio>> ObterPorAlunoAsync(int alunoId, CancellationToken cancellationToken);
+        public Task <IEnumerable<Estagio>> ObterPorOrientadorAsync(int orientadorId, CancellationToken cancellationToken);
+        public Task <IEnumerable<Estagio>> ObterPorEmpresaAsync(int empresaId, CancellationToken cancellationToken);
+
     }
 }
