@@ -1,10 +1,11 @@
 using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 
 namespace EstagioREC.Application.UseCases.EmpresaUseCases.AtualizarEmpresa;
 
-public class AtualizarEmpresaHandler : IRequestHandler<AtualizarEmpresaRequest, AtualizarEmpresaResponse>
+public class AtualizarEmpresaHandler : IRequestHandler<AtualizarEmpresaRequest, EmpresaResponse>
 {
     private readonly IEmpresaRepository _empresaRepository;
     private readonly IMapper _mapper;
@@ -15,7 +16,7 @@ public class AtualizarEmpresaHandler : IRequestHandler<AtualizarEmpresaRequest, 
         _mapper = mapper;
     }
 
-    public async Task<AtualizarEmpresaResponse> Handle(AtualizarEmpresaRequest request,
+    public async Task<EmpresaResponse> Handle(AtualizarEmpresaRequest request,
         CancellationToken cancellationToken)
     {
         var empresa = await _empresaRepository.ObterPorIdAsync(request.Id, cancellationToken);
@@ -27,6 +28,6 @@ public class AtualizarEmpresaHandler : IRequestHandler<AtualizarEmpresaRequest, 
 
         await _empresaRepository.AtualizarAsync(empresa, cancellationToken);
         
-        return _mapper.Map<AtualizarEmpresaResponse>(empresa);
+        return _mapper.Map<EmpresaResponse>(empresa);
     }
 }

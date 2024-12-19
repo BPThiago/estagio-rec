@@ -1,3 +1,4 @@
+using EstagioREC.Application.UseCases.BaseUseCases;
 using MediatR;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.AtualizarOrientador
@@ -7,5 +8,5 @@ namespace EstagioREC.Application.UseCases.OrientadorUseCases.AtualizarOrientador
         string Nome,
         string Email,
         string Telefone
-    ) : IRequest<AtualizarOrientadorResponse>;
+    ) : IRequest<OrientadorResponse>;
 }

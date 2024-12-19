@@ -1,10 +1,11 @@
 using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 
 namespace EstagioREC.Application.UseCases.AlunoUseCases.DeletarAluno;
 
-    public class DeletarAlunoHandler : IRequestHandler<DeletarAlunoRequest, DeletarAlunoResponse>
+    public class DeletarAlunoHandler : IRequestHandler<DeletarAlunoRequest, AlunoResponse>
     {
         private readonly IAlunoRepository _alunoRepository;
         private readonly IMapper _mapper;
@@ -15,7 +16,7 @@ namespace EstagioREC.Application.UseCases.AlunoUseCases.DeletarAluno;
             _mapper = mapper;
         }
 
-        public async Task<DeletarAlunoResponse> Handle(DeletarAlunoRequest request,
+        public async Task<AlunoResponse> Handle(DeletarAlunoRequest request,
             CancellationToken cancellationToken)
         {
             var aluno = await _alunoRepository.ObterPorIdAsync(request.Id, cancellationToken);
@@ -25,6 +26,6 @@ namespace EstagioREC.Application.UseCases.AlunoUseCases.DeletarAluno;
         
             await _alunoRepository.DeletarAsync(aluno, cancellationToken);
         
-            return _mapper.Map<DeletarAlunoResponse>(aluno);
+            return _mapper.Map<AlunoResponse>(aluno);
         }
     }

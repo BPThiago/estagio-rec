@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 using EstagioREC.Domain;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.AdicionarOrientador
@@ -8,7 +9,7 @@ namespace EstagioREC.Application.UseCases.OrientadorUseCases.AdicionarOrientador
         public AdicionarOrientadorMapper()
         {
             CreateMap<AdicionarOrientadorRequest, Orientador>();
-            CreateMap<Orientador, AdicionarOrientadorResponse>();
+            CreateMap<Orientador, OrientadorResponse>();
         }
     }
 }

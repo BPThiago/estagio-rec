@@ -1,4 +1,5 @@
 using EstagioREC.Application.UseCases.AlunoUseCases.AtualizarAluno;
+using EstagioREC.Application.UseCases.BaseUseCases;
 using MediatR;
 
 namespace EstagioREC.Application.UseCases.AlunoUseCases.AtualizarAluno {
@@ -6,5 +7,5 @@ namespace EstagioREC.Application.UseCases.AlunoUseCases.AtualizarAluno {
         int Id,
         string Nome,
         string Matricula
-    ) : IRequest<AtualizarAlunoResponse>;
+    ) : IRequest<AlunoResponse>;
 }

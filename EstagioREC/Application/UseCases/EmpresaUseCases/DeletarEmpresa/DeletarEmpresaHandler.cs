@@ -1,10 +1,11 @@
 using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 
 namespace EstagioREC.Application.UseCases.EmpresaUseCases.DeletarEmpresa;
 
-public class DeletarEmpresaHandler : IRequestHandler<DeletarEmpresaRequest, DeletarEmpresaResponse>
+public class DeletarEmpresaHandler : IRequestHandler<DeletarEmpresaRequest, EmpresaResponse>
 {
     private readonly IEmpresaRepository _empresaRepository;
     private readonly IMapper _mapper;
@@ -15,7 +16,7 @@ public class DeletarEmpresaHandler : IRequestHandler<DeletarEmpresaRequest, Dele
         _mapper = mapper;
     }
 
-    public async Task<DeletarEmpresaResponse> Handle(DeletarEmpresaRequest request,
+    public async Task<EmpresaResponse> Handle(DeletarEmpresaRequest request,
         CancellationToken cancellationToken)
     {
         var empresa = await _empresaRepository.ObterPorIdAsync(request.Id, cancellationToken);
@@ -25,6 +26,6 @@ public class DeletarEmpresaHandler : IRequestHandler<DeletarEmpresaRequest, Dele
         
         await _empresaRepository.DeletarAsync(empresa, cancellationToken);
         
-        return _mapper.Map<DeletarEmpresaResponse>(empresa);
+        return _mapper.Map<EmpresaResponse>(empresa);
     }
 }

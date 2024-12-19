@@ -1,4 +1,5 @@
 using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 using EstagioREC.Domain;
 using MediatR;
 
@@ -9,6 +10,6 @@ public class AtualizarEstagioMapper : Profile
     public AtualizarEstagioMapper()
     {
         CreateMap<AtualizarEstagioRequest, Estagio>();
-        CreateMap<Estagio, AtualizarEstagioResponse>();
+        CreateMap<Estagio, EstagioResponse>();
     }
 }

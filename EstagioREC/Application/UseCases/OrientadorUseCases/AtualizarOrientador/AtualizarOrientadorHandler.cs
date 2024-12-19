@@ -1,10 +1,11 @@
 using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.AtualizarOrientador;
 
-public class AtualizarOrientadorHandler : IRequestHandler<AtualizarOrientadorRequest, AtualizarOrientadorResponse>
+public class AtualizarOrientadorHandler : IRequestHandler<AtualizarOrientadorRequest, OrientadorResponse>
 {
     private readonly IOrientadorRepository _orientadorRepository;
     private readonly IMapper _mapper;
@@ -15,7 +16,7 @@ public class AtualizarOrientadorHandler : IRequestHandler<AtualizarOrientadorReq
         _mapper = mapper;
     }
 
-    public async Task<AtualizarOrientadorResponse> Handle(AtualizarOrientadorRequest request,
+    public async Task<OrientadorResponse> Handle(AtualizarOrientadorRequest request,
         CancellationToken cancellationToken)
     {
         var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id, cancellationToken);
@@ -29,6 +30,6 @@ public class AtualizarOrientadorHandler : IRequestHandler<AtualizarOrientadorReq
 
         await _orientadorRepository.AtualizarAsync(orientador, cancellationToken);
         
-        return _mapper.Map<AtualizarOrientadorResponse>(orientador);
+        return _mapper.Map<OrientadorResponse>(orientador);
     }
 }

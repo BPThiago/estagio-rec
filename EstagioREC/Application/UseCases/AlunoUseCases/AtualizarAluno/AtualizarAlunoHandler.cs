@@ -1,10 +1,11 @@
 using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 using AutoMapper;
+using EstagioREC.Application.UseCases.BaseUseCases;
 
 namespace EstagioREC.Application.UseCases.AlunoUseCases.AtualizarAluno;
 
-public class AtualizarAlunoHandler : IRequestHandler<AtualizarAlunoRequest, AtualizarAlunoResponse>
+public class AtualizarAlunoHandler : IRequestHandler<AtualizarAlunoRequest, AlunoResponse>
 {
     private readonly IAlunoRepository _alunoRepository;
     private readonly IMapper _mapper;
@@ -15,7 +16,7 @@ public class AtualizarAlunoHandler : IRequestHandler<AtualizarAlunoRequest, Atua
         _mapper = mapper;
     }
 
-    public async Task<AtualizarAlunoResponse> Handle(AtualizarAlunoRequest request,
+    public async Task<AlunoResponse> Handle(AtualizarAlunoRequest request,
         CancellationToken cancellationToken)
     {
         var aluno = await _alunoRepository.ObterPorIdAsync(request.Id, cancellationToken);
@@ -28,6 +29,6 @@ public class AtualizarAlunoHandler : IRequestHandler<AtualizarAlunoRequest, Atua
 
         await _alunoRepository.AtualizarAsync(aluno, cancellationToken);
         
-        return _mapper.Map<AtualizarAlunoResponse>(aluno);
+        return _mapper.Map<AlunoResponse>(aluno);
     }
 }
