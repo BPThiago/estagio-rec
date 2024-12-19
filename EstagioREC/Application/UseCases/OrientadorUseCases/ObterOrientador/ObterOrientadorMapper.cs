@@ -8,6 +8,7 @@ public sealed class ObterOrientadorMapper : Profile
 {
     public ObterOrientadorMapper()
     {
+        CreateMap<ObterOrientadorRequest, Orientador>();
         CreateMap<Orientador, OrientadorResponse>();
     }
 }

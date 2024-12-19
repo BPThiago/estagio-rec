@@ -2,23 +2,18 @@ using EstagioREC.Persistence.Repository.Interfaces;
 using AutoMapper;
 using MediatR;
 using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Domain;
 
 namespace EstagioREC.Application.UseCases.EmpresaUseCases.ObterTodosEmpresa;
 
-public sealed class ObterTodosEmpresaHandler : IRequestHandler<ObterTodosEmpresaRequest, List<EmpresaResponse>>
+public sealed class ObterTodosEmpresaHandler : ObterTodosHandler<
+        ObterTodosEmpresaRequest,
+        EmpresaResponse,
+        Empresa,
+        IEmpresaRepository
+    >
 {
-    private readonly IEmpresaRepository _empresaRepository;
-    private readonly IMapper _mapper;
-
-    public ObterTodosEmpresaHandler(IEmpresaRepository empresaRepository, IMapper mapper)
+    public ObterTodosEmpresaHandler(IEmpresaRepository empresaRepository, IMapper mapper) : base(empresaRepository, mapper)
     {
-        _empresaRepository = empresaRepository;
-        _mapper = mapper;
-    }
-
-    public async Task<List<EmpresaResponse>> Handle(ObterTodosEmpresaRequest request, CancellationToken cancellationToken)
-    {
-        var empresas = await _empresaRepository.ObterTodosAsync(cancellationToken);
-        return _mapper.Map<List<EmpresaResponse>>(empresas);
     }
 }

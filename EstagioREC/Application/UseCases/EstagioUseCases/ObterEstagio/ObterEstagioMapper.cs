@@ -8,6 +8,7 @@ public sealed class ObterEstagioMapper : Profile
 {
     public ObterEstagioMapper()
     {
+        CreateMap<ObterEstagioRequest, Estagio>();
         CreateMap<Estagio, EstagioResponse>();
     }
 }

@@ -6,22 +6,15 @@ using MediatR;
 
 namespace EstagioREC.Application.UseCases.EmpresaUseCases.AdicionarEmpresa
 {
-    public class AdicionarEmpresaHandler : IRequestHandler<AdicionarEmpresaRequest, EmpresaResponse>
+    public class AdicionarEmpresaHandler : AdicionarHandler<
+        AdicionarEmpresaRequest,
+        EmpresaResponse,
+        Empresa,
+        IEmpresaRepository
+    >
     {
-        private readonly IEmpresaRepository _empresaRepository;
-        private readonly IMapper _mapper;
-
-        public AdicionarEmpresaHandler(IEmpresaRepository empresaRepository, IMapper mapper)
+        public AdicionarEmpresaHandler(IEmpresaRepository empresaRepository, IMapper mapper) : base(empresaRepository, mapper)
         {
-            _empresaRepository = empresaRepository;
-            _mapper = mapper; 
-        }
-
-        public async Task<EmpresaResponse> Handle(AdicionarEmpresaRequest request, CancellationToken cancellationToken)
-        {
-            var empresa = _mapper.Map<Empresa>(request);
-            await _empresaRepository.AdicionarAsync(empresa, cancellationToken);
-            return _mapper.Map<EmpresaResponse>(empresa);
         }
     }
 }

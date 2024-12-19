@@ -8,6 +8,7 @@ public sealed class ObterEmpresaMapper : Profile
 {
     public ObterEmpresaMapper()
     {
+        CreateMap<ObterEmpresaRequest, Empresa>();
         CreateMap<Empresa, EmpresaResponse>();
     }
 }

@@ -1,24 +1,19 @@
 using AutoMapper;
 using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Domain;
 using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 
 namespace EstagioREC.Application.UseCases.AlunoUseCases.ObterTodosAluno;
 
-public sealed class ObterTodosAlunoHandler : IRequestHandler<ObterTodosAlunoRequest, List<AlunoResponse>>
+public class ObterTodosAlunoHandler  : ObterTodosHandler<
+        ObterTodosAlunoRequest,
+        AlunoResponse,
+        Aluno,
+        IAlunoRepository
+    >
 {
-    private readonly IAlunoRepository _alunoRepository;
-    private readonly IMapper _mapper;
-
-    public ObterTodosAlunoHandler(IAlunoRepository alunoRepository, IMapper mapper)
+    public ObterTodosAlunoHandler(IAlunoRepository alunoRepository, IMapper mapper) : base(alunoRepository, mapper)
     {
-        _alunoRepository = alunoRepository;
-        _mapper = mapper;
-    }
-
-    public async Task<List<AlunoResponse>> Handle(ObterTodosAlunoRequest request, CancellationToken cancellationToken)
-    { 
-        var alunos = await _alunoRepository.ObterTodosAsync(cancellationToken);
-        return _mapper.Map<List<AlunoResponse>>(alunos);
     }
 }

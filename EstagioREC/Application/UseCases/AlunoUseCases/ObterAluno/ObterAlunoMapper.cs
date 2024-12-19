@@ -8,6 +8,7 @@ public class ObterAlunoMapper : Profile
 {
     public ObterAlunoMapper()
     {
+        CreateMap<ObterAlunoRequest, Aluno>();
         CreateMap<Aluno, AlunoResponse>();
     }
 }

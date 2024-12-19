@@ -2,23 +2,18 @@ using EstagioREC.Persistence.Repository.Interfaces;
 using MediatR;
 using AutoMapper;
 using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Domain;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.ObterOrientador;
 
-public sealed class ObterOrientadorHandler : IRequestHandler<ObterOrientadorRequest, OrientadorResponse>
+public sealed class ObterOrientadorHandler : ObterHandler<
+        ObterOrientadorRequest,
+        OrientadorResponse,
+        Orientador,
+        IOrientadorRepository
+    >
 {
-    private readonly IOrientadorRepository _orientadorRepository;
-    private readonly IMapper _mapper;
-
-    public ObterOrientadorHandler(IOrientadorRepository orientadorRepository, IMapper mapper)
+    public ObterOrientadorHandler(IOrientadorRepository repository, IMapper mapper) : base(repository, mapper) 
     {
-        _orientadorRepository = orientadorRepository;
-        _mapper = mapper;
-    }
-
-    public async Task<OrientadorResponse> Handle(ObterOrientadorRequest request, CancellationToken cancellationToken)
-    {
-        var orientador = await _orientadorRepository.ObterPorIdAsync(request.Id, cancellationToken);
-        return _mapper.Map<OrientadorResponse>(orientador);
     }
 }

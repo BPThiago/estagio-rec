@@ -6,22 +6,15 @@ using MediatR;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.AdicionarOrientador
 {
-    public class AdicionarOrientadorHandler : IRequestHandler<AdicionarOrientadorRequest, OrientadorResponse>
+    public class AdicionarOrientadorHandler : AdicionarHandler<
+        AdicionarOrientadorRequest,
+        OrientadorResponse,
+        Orientador,
+        IOrientadorRepository
+    >
     {
-        private readonly IOrientadorRepository _orientadorRepository;
-        private readonly IMapper _mapper;
-
-        public AdicionarOrientadorHandler(IOrientadorRepository orientadorRepository, IMapper mapper)
+        public AdicionarOrientadorHandler(IOrientadorRepository repository, IMapper mapper) : base(repository, mapper) 
         {
-            _orientadorRepository = orientadorRepository;
-            _mapper = mapper;
-        }
-
-        public async Task<OrientadorResponse> Handle(AdicionarOrientadorRequest request, CancellationToken cancellationToken)
-        {
-            var orientador = _mapper.Map<Orientador>(request);
-            await _orientadorRepository.AdicionarAsync(orientador, cancellationToken);
-            return _mapper.Map<OrientadorResponse>(orientador);
         }
     }
 }
