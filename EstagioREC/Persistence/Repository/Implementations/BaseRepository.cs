@@ -36,6 +36,7 @@ namespace EstagioREC.Persistence.Repository.Implementations
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync(cancellationToken);
         }
+
         public async Task DeletarAsync(T entity, CancellationToken cancellationToken)
         {
             _context.Remove(entity);

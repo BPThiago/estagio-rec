@@ -33,12 +33,14 @@ namespace EstagioREC.Controller
             var response = await _mediator.Send(new ObterEstagioPorAlunoRequest(alunoId), cancellationToken);
             return Ok(response);
         }
+
         [HttpGet("orientador/{orientadorId}")]
         public async Task<ActionResult<List<EstagioResponse>>> ObterEstagioPorOrientador(int orientadorId, CancellationToken cancellationToken) 
         {
             var response = await _mediator.Send(new ObterEstagioPorOrientadorRequest(orientadorId), cancellationToken);
             return Ok(response);
         }
+
         [HttpGet("empresa/{empresaId}")]
         public async Task<ActionResult<List<EstagioResponse>>> ObterEstagioPorEmpresa(int empresaId, CancellationToken cancellationToken) 
         {

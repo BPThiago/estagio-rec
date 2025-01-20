@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using EstagioREC.Domain;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace EstagioREC.Persistence.Data
 {
@@ -7,7 +9,22 @@ namespace EstagioREC.Persistence.Data
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options) { }
+            : base(options) 
+        {
+            try
+            {
+                var databaseCreator = Database.GetService<IRelationalDatabaseCreator>();
+                if (databaseCreator != null)
+                {
+                    if (!databaseCreator.CanConnect()) databaseCreator.Create();
+                    if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         public DbSet<Orientador> Orientadores => Set<Orientador>();
         public DbSet<Aluno> Alunos => Set<Aluno>();

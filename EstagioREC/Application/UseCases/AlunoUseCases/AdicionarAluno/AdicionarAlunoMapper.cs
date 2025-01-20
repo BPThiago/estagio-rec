@@ -12,3 +12,4 @@ public sealed class AdicionarAlunoMapper : Profile
         CreateMap<Aluno, AlunoResponse>();
     }
 }
+

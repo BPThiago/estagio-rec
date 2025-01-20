@@ -1,9 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using EstagioREC.Persistence.Data;
-using EstagioREC.Persistence.Repository.Implementations;
-using EstagioREC.Persistence.Repository.Interfaces;
-using EstagioREC.Persistence;
 using EstagioREC.Application.Services;
+using EstagioREC.Persistence;
+using EstagioREC.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-DbInitializer.RetrieveFromSheets(app);
+//DbInitializer.RetrieveFromSheets(app);
 app.MapControllers();
 
 if (app.Environment.IsDevelopment())

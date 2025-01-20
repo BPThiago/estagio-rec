@@ -5,12 +5,8 @@ using EstagioREC.Application.UseCases.OrientadorUseCases.AtualizarOrientador;
 using EstagioREC.Application.UseCases.OrientadorUseCases.DeletarOrientador;
 using EstagioREC.Application.UseCases.OrientadorUseCases.ObterOrientador;
 using EstagioREC.Application.UseCases.OrientadorUseCases.ObterTodosOrientador;
-using EstagioREC.Domain;
-using EstagioREC.Persistence.Repository.Interfaces;
-using Google.Apis.Sheets.v4.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 
 namespace EstagioREC.Controller
 {
@@ -24,8 +20,10 @@ namespace EstagioREC.Controller
     DeletarOrientadorRequest,
     OrientadorResponse>
     {
-        public OrientadorController(IMediator mediator, IMapper mapper) : base(mediator, mapper) 
-        { 
+        public OrientadorController(IMediator mediator, IMapper mapper) : base(mediator, mapper)
+        {
         }
     }
 }
+
+
