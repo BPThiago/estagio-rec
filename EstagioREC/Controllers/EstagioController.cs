@@ -5,11 +5,11 @@ using EstagioREC.Application.UseCases.EstagioUseCases.AtualizarEstagio;
 using EstagioREC.Application.UseCases.EstagioUseCases.DeletarEstagio;
 using EstagioREC.Application.UseCases.EstagioUseCases.ObterTodosEstagio;
 using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagio;
-using EstagioREC.Application.UseCases.BaseUseCases;
 using AutoMapper;
 using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagioPorAluno;
 using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagioPorOrientador;
 using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagioPorEmpresa;
+using EstagioREC.Application.DTOs;
 
 namespace EstagioREC.Controller
 {

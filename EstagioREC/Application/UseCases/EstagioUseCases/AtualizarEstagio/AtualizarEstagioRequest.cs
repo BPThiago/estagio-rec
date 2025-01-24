@@ -1,4 +1,4 @@
-using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Application.DTOs;
 using EstagioREC.Domain.Enums;
 using MediatR;
 

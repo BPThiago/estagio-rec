@@ -1,4 +1,6 @@
-﻿namespace EstagioREC.Application.UseCases.BaseUseCases
+﻿using EstagioREC.Application.UseCases.BaseUseCases;
+
+namespace EstagioREC.Application.DTOs
 {
     public sealed record AlunoResponse : BaseResponse
     {

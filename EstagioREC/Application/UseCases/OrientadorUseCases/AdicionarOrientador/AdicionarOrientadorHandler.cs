@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EstagioREC.Application.DTOs;
 using EstagioREC.Application.UseCases.BaseUseCases;
 using EstagioREC.Domain;
 using EstagioREC.Persistence.Repository.Interfaces;
