@@ -1,5 +1,5 @@
 using AutoMapper;
-using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Application.DTOs;
 using EstagioREC.Application.UseCases.EmpresaUseCases.AdicionarEmpresa;
 using EstagioREC.Application.UseCases.EmpresaUseCases.AtualizarEmpresa;
 using EstagioREC.Application.UseCases.EmpresaUseCases.DeletarEmpresa;

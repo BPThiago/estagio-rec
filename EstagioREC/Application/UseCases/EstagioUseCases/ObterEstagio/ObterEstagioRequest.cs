@@ -1,4 +1,4 @@
-using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Application.DTOs;
 using MediatR;
 
 namespace EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagio;

@@ -1,10 +1,10 @@
 using AutoMapper;
+using EstagioREC.Application.DTOs;
 using EstagioREC.Application.UseCases.AlunoUseCases.AdicionarAluno;
 using EstagioREC.Application.UseCases.AlunoUseCases.AtualizarAluno;
 using EstagioREC.Application.UseCases.AlunoUseCases.DeletarAluno;
 using EstagioREC.Application.UseCases.AlunoUseCases.ObterAluno;
 using EstagioREC.Application.UseCases.AlunoUseCases.ObterTodosAluno;
-using EstagioREC.Application.UseCases.BaseUseCases;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

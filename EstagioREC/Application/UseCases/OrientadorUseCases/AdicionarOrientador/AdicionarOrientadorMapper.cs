@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EstagioREC.Application.UseCases.BaseUseCases;
+using EstagioREC.Application.DTOs;
 using EstagioREC.Domain;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.AdicionarOrientador

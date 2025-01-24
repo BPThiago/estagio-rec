@@ -3,6 +3,7 @@ using AutoMapper;
 using MediatR;
 using EstagioREC.Application.UseCases.BaseUseCases;
 using EstagioREC.Domain;
+using EstagioREC.Application.DTOs;
 
 namespace EstagioREC.Application.UseCases.OrientadorUseCases.ObterTodosOrientador;
 
