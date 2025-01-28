@@ -1,8 +1,30 @@
+networks:
+  estagio-network:
+
 services:
+  sqlserver:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+     - "1433:1433"
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Password@123
+    networks:
+      - estagio-network
+
   estagiorec:
     image: ${DOCKER_REGISTRY-}estagiorec
     build:
       context: .
       dockerfile: EstagioREC/Dockerfile
     ports:
-        - "5000:5000"
+      - "80:8080"
+    depends_on:
+      - sqlserver
+    environment:
+    - DB_HOST=sqlserver
+    - DB_NAME=EstagioREC
+    - DB_PASSWORD=Password@123
+    networks:
+      - estagio-network 

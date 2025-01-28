@@ -1,105 +1,52 @@
-﻿using EstagioREC.Model;
-using EstagioREC.Model.DTOs;
-using EstagioREC.Repository;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using EstagioREC.Application.UseCases.EstagioUseCases.AdicionarEstagio;
+using EstagioREC.Application.UseCases.EstagioUseCases.AtualizarEstagio;
+using EstagioREC.Application.UseCases.EstagioUseCases.DeletarEstagio;
+using EstagioREC.Application.UseCases.EstagioUseCases.ObterTodosEstagio;
+using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagio;
+using AutoMapper;
+using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagioPorAluno;
+using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagioPorOrientador;
+using EstagioREC.Application.UseCases.EstagioUseCases.ObterEstagioPorEmpresa;
+using EstagioREC.Application.DTOs;
 
-namespace EstagioREC.Controllers
+namespace EstagioREC.Controller
 {
     [ApiController]
-    [Route("/")]
-    public class EstagioController : ControllerBase
+    [Route("estagios")]
+    public class EstagioController : BaseController
+    <ObterTodosEstagioRequest,
+    ObterEstagioRequest,
+    AdicionarEstagioRequest,
+    AtualizarEstagioRequest,
+    DeletarEstagioRequest,
+    EstagioResponse>
     {
-        private readonly IEstagioRepository _estagioRepository;
+        public EstagioController(IMediator mediator, IMapper mapper) : base(mediator, mapper) 
+        { 
+        }
 
-        public EstagioController(IEstagioRepository estagioRepository)
+        [HttpGet("aluno/{alunoId}")]
+        public async Task<ActionResult<List<EstagioResponse>>> ObterEstagioPorAluno(int alunoId, CancellationToken cancellationToken) 
         {
-            _estagioRepository = estagioRepository;
+            var response = await _mediator.Send(new ObterEstagioPorAlunoRequest(alunoId), cancellationToken);
+            return Ok(response);
         }
 
-        [HttpGet("estagios/{id}")]
-        public async Task<ActionResult<EstagioResponseDTO>> ObterEstagio(int id)
+        [HttpGet("orientador/{orientadorId}")]
+        public async Task<ActionResult<List<EstagioResponse>>> ObterEstagioPorOrientador(int orientadorId, CancellationToken cancellationToken) 
         {
-            var estagio = await _estagioRepository.ObterPorIdAsync(id);
-            if (estagio == null)
-                return NotFound();
-
-            return Ok(estagio);
+            var response = await _mediator.Send(new ObterEstagioPorOrientadorRequest(orientadorId), cancellationToken);
+            return Ok(response);
         }
 
-        [HttpGet("estagios/")]
-        public async Task<ActionResult<IEnumerable<EstagioResponseDTO>>> ListarEstagios()
+        [HttpGet("empresa/{empresaId}")]
+        public async Task<ActionResult<List<EstagioResponse>>> ObterEstagioPorEmpresa(int empresaId, CancellationToken cancellationToken) 
         {
-            return Ok(await _estagioRepository.ObterTodosAsync());
-        }
-
-        [HttpPost("estagios/")]
-        public async Task<ActionResult<EstagioResponseDTO>> CriarEstagio(EstagioDTO estagioDTO)
-        {
-            // Mapear o DTO para a entidade
-            var estagio = new Estagio
-            {
-                DatIni = estagioDTO.DatIni,
-                DatFim = estagioDTO.DatFim,
-                Situacao = estagioDTO.Situacao,
-                AlunoId = estagioDTO.AlunoId,
-                OrientadorId = estagioDTO.OrientadorId,
-                EmpresaId = estagioDTO.EmpresaId
-            };
-
-            var estagioCriado = await _estagioRepository.AdicionarAsync(estagio);
-
-            return CreatedAtAction(nameof(ObterEstagio), new { id = estagioCriado.Id }, estagioCriado);
-        }
-
-        [HttpPut("estagios/{id}")]
-        public async Task<IActionResult> AtualizarEstagio(int id, EstagioDTO estagioDTO)
-        {
-            var estagioExistente = await _estagioRepository.ObterPorIdAsync(id);
-            if (estagioExistente == null)
-                return NotFound();
-
-            // Mapear os valores do DTO para a entidade
-            var estagio = new Estagio
-            {
-                Id = id,
-                DatIni = estagioDTO.DatIni,
-                DatFim = estagioDTO.DatFim,
-                Situacao = estagioDTO.Situacao,
-                AlunoId = estagioDTO.AlunoId,
-                OrientadorId = estagioDTO.OrientadorId,
-                EmpresaId = estagioDTO.EmpresaId
-            };
-
-            await _estagioRepository.AtualizarAsync(estagio);
-            return NoContent();
-        }
-
-        [HttpDelete("estagios/{id}")]
-        public async Task<IActionResult> DeletarEstagio(int id)
-        {
-            var estagio = await _estagioRepository.ObterPorIdAsync(id);
-            if (estagio == null)
-                return NotFound();
-
-            await _estagioRepository.DeletarAsync(id);
-            return NoContent();
-        }
-
-        [HttpGet("estagios/orientador/{orientadorId}")]
-        public async Task<ActionResult<IEnumerable<EstagioResponseDTO>>> ListarEstagiosPorOrientador(int orientadorId) {
-            var estagios = await _estagioRepository.ObterPorOrientadorAsync(orientadorId);
-            return Ok(estagios);
-        }
-        
-        [HttpGet("estagios/aluno/{alunoId}")]
-        public async Task<ActionResult<IEnumerable<EstagioResponseDTO>>> ListarEstagiosPorAluno(int alunoId) {
-            var estagios = await _estagioRepository.ObterPorAlunoAsync(alunoId);
-            return Ok(estagios);
-        }
-        [HttpGet("estagios/empresa/{empresaId}")]
-        public async Task<ActionResult<IEnumerable<EstagioResponseDTO>>> ListarEstagiosPorEmpresa(int empresaId) {
-            var estagios = await _estagioRepository.ObterPorEmpresaAsync(empresaId);
-            return Ok(estagios);
+            var response = await _mediator.Send(new ObterEstagioPorEmpresaRequest(empresaId), cancellationToken);
+            return Ok(response);
         }
     }
 }
+

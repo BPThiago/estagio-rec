@@ -4,9 +4,9 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>e2e1600c-5232-4e01-8ed4-63689d064512</ProjectGuid>
+    <ProjectGuid>8370b2fc-37b5-42b9-9f9a-8d02b1106eeb</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>estagiorec</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
