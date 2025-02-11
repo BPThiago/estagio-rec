@@ -4,8 +4,8 @@ namespace EstagioREC.Domain
 {
     public class Estagio : BaseEntity
     {
-        public DateTime DatIni { get; set; }
-        public DateTime DatFim { get; set; }
+        public DateTime? DatIni { get; set; }
+        public DateTime? DatFim { get; set; }
         public SituacaoEnum Situacao { get; set; }
         public Aluno Aluno { get; set; }
         public int AlunoId { get; set; }
